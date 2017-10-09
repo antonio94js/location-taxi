@@ -1,0 +1,40 @@
+{
+    "root": true,
+    "extends": "airbnb-base",
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "plugins": [
+        "import"
+    ],
+    "parserOptions": {
+       "ecmaVersion": 2017,
+       "sourceType": "module",
+       "ecmaFeatures": {
+         "globalReturn": true,
+         "experimentalObjectRestSpread": true
+       }
+    },
+    "rules": {
+        "indent": 0,
+        "no-tabs": 0,
+        "no-param-reassign": 0,
+        "no-trailing-spaces": 0,
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "semi": "off",
+        func-names: ["error", "never"],
+        "no-var": 1,
+        "class-methods-use-this": 0,
+        spaced-comment: ["error", "always", { "exceptions": ["*"] }],
+        max-len: ["error", { "ignoreComments": true }, { "code": 120 }],
+        "no-console": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-return-assign": "off",
+    },
+    "globals": {
+    }
+}
