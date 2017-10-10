@@ -21,6 +21,6 @@ The API is integrated with other services like
 
 * [FCM](https://firebase.google.com/docs/cloud-messaging/?hl=es-419) - Used for send push notification to the movil client
 
-## Additional technologies
+### Additional technologies
 
 * [Docker](https://www.docker.com/) - Used for build, ship, and run the API, Anywhere

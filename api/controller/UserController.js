@@ -35,7 +35,6 @@ class UserController {
 
     async sendNotification(ctx) {
         try {
-            console.log(ctx.state.user);
             ctx.body = await NotificationService.sendNotification(ctx.request.body, ctx.state.user._id)
         } catch (e) {
             return errorHandler(e, ctx);

@@ -14,7 +14,6 @@ const socketLogic = (server) => {
             });
             socket.on('driver:location', async (data) => {
                 const { id, lat, lon } = data;
-                console.log(id, lat, lon);
                 User.findByIdAndUpdate(id, { lat, lon }).then();
             })
             socket.on('driver:path', async (data) => {
