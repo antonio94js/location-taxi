@@ -11,32 +11,35 @@ class PushService extends FirebaseCloudMessage {
     }
 
     async sendPushNotification(to, context, data) {
-        // const { to, context, data } = notificationData;
-
-        switch (context) {
-            case 'driverRequest':
-                {
-                    this.sendMessage(to, 'You have a new service', data)
-                    break;
-                }
-            case 'driverResponse':
-                {
-                    if (data.accept) {
-                        this.sendMessage(to, 'The driver has accepted', data)
-                    } else {
-                        this.sendMessage(to, 'The driver has declined', data)
+        let title = null;
+        try {
+            switch (context) {
+                case 'driverRequest': {
+                        title = 'new_service';
+                        break;
                     }
-
+                case 'driverResponse': {
+                        if (data.accept) {
+                            title = 'has_accepted';
+                        } else {
+                            title = 'has_declined';
+                        }
+                        break;
+                    }
+                default:
                     break;
-                }
-            default:
-                break;
+            }
+            const response = await this.sendMessage(to, title, data)
+            return response;
+        } catch (e) {
+            return e;
         }
     }
 
     async sendMessage(token, title, body) {
         try {
-            await this.send(this._generateNotificationObject(token, title, body))
+            const NotificationObject = this._generateNotificationObject(token, title, body);
+            await this.send(NotificationObject)
             return true;
         } catch (e) {
             return false;

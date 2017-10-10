@@ -52,9 +52,11 @@ const UserSchema = new Schema({
     },
     lat: {
         type: Number,
+        default: 0,
     },
     lon: {
         type: Number,
+        default: 0,
     },
     phone: {
         type: String,
