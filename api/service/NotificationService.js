@@ -22,6 +22,7 @@ class NotificationService {
             if (user) {
                 PushService.sendPushNotification(user.fcmToken, context, data)
                 if (context === 'driverResponse' && data.accept) {
+                    console.log("poniendo false" , driverID);
                     UserService.updateUserByID(driverID, { status: false }).then();
                 }
                 return { success: true };
