@@ -5,7 +5,7 @@
  *
  */
 import User from '../model/User';
-import PushService from '../service/PushService';
+import NotificationService from '../service/NotificationService';
 import errorHandler from '../handler/ErrorHandler';
 
 class UserController {
@@ -27,13 +27,7 @@ class UserController {
         try {
             const { _id } = ctx.state.user;
             const { fcmToken } = ctx.request.body
-
-            if (fcmToken) {
-                await User.findByIdAndUpdate(_id, { fcmToken });
-                return ctx.body = { success: true };
-            }
-
-            ctx.body = { success: false };
+            ctx.body = await NotificationService.subscribeFCM(_id, fcmToken)
         } catch (e) {
             return errorHandler(e, ctx);
         }
@@ -41,15 +35,7 @@ class UserController {
 
     async sendNotification(ctx) {
         try {
-            const { id, data, context } = ctx.request.body;
-            const user = await User.findById(id).select('fcmToken');
-
-            if (user) {
-                PushService.sendPushNotification(user.fcmToken, context, data)
-                return ctx.body = { success: true };
-            }
-
-            return ctx.body = { success: false, InvalidUser: true };
+            ctx.body = await NotificationService.sendNotification(ctx.request.body, ctx.state.user.id)
         } catch (e) {
             return errorHandler(e, ctx);
         }

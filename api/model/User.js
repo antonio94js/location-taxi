@@ -49,6 +49,7 @@ const UserSchema = new Schema({
     },
     status: {
         type: Boolean,
+        default: true,
     },
     lat: {
         type: Number,

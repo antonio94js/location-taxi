@@ -10,7 +10,7 @@ import errorHandler from '../handler/ErrorHandler';
 class DriverController {
     async findAll(ctx) {
         try {
-            const drivers = await User.find({ userType: 'Taxista' })
+            const drivers = await User.find({ userType: 'Taxista', status: true })
                                       .select('-__v -address -password -fcmToken -username');
             ctx.body = drivers;
         } catch (e) {

@@ -11,14 +11,12 @@ class AuthController {
             }
             if (err) {
                 ctx.status = 500
-                ctx.body = err;
-            } else {
-                ctx.body = user;
+                return ctx.body = err;
             }
+            ctx.body = user;
         })(ctx, next);
     }
 }
 
-
-export default new AuthController();
-// "password": "123asd"
+const authController = new AuthController();
+export default authController;
